@@ -1,0 +1,77 @@
+gitGraph
+   %% === 基本ライン ===
+   commit tag:"Initial"
+   branch develop
+   commit tag:"便宜上"
+   checkout develop
+   commit
+
+   %% === インフラブランチ ===
+   branch feature/infrastructure
+   checkout feature/infrastructure
+   commit
+   checkout feature/infrastructure
+
+   checkout develop
+   merge feature/infrastructure
+   commit
+
+   %% === フロントエンド機能ブランチ ===
+   branch feature/frontend
+   commit tag:"便宜上"
+   checkout feature/frontend
+   commit
+   checkout feature/frontend
+
+   branch feature/frontend/login-page
+   commit
+   checkout feature/frontend/login-page
+   checkout feature/frontend
+   merge feature/frontend/login-page
+   commit
+
+   branch feature/frontend/dashboard
+   checkout feature/frontend/dashboard
+   commit
+   checkout feature/frontend
+   merge feature/frontend/dashboard
+   commit tag:"便宜上"
+   checkout develop
+   merge feature/frontend
+   commit
+
+   %% === バックエンド機能ブランチ ===
+   branch feature/backend
+   commit tag:"便宜上"
+   checkout feature/backend
+   commit
+   checkout feature/backend
+
+   branch feature/backend/auth
+   checkout feature/backend/auth
+   commit
+   checkout feature/backend
+   merge feature/backend/auth
+   commit
+
+   branch feature/backend/payment-gateway
+   checkout feature/backend/payment-gateway
+   commit
+   checkout feature/backend
+   merge feature/backend/payment-gateway
+   commit tag:"便宜上"
+   checkout develop
+   merge feature/backend
+   commit
+
+   checkout main
+   merge develop tag:"v1.0.0"
+
+   %% === リリース準備 ===
+   checkout develop
+   branch hotfix
+   commit
+   checkout hotfix
+   checkout main
+   merge hotfix tag:"v1.0.1"
+   commit tag:"便宜上"
