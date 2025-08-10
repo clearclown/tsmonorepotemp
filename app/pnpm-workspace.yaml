@@ -1,9 +1,0 @@
-packages:
-  - apps/*
-  - packages/*
-  - tools/*
-  - '*'
-
-ignoredBuiltDependencies:
-  - '@swc/core'
-  - nx
