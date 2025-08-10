@@ -1,0 +1,31 @@
+# docker-compose.dev.yml
+# 開発環境構築用のDocker Compose設定
+
+services:
+  monprepo:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: monprepo-dev:latest
+    container_name: monprepo-dev
+
+    # ttyを開いたままにする（bashに常時接続可能）
+    tty: true
+    stdin_open: true
+
+    volumes:
+      # プロジェクトルートをマウント
+      - ../../../:/monprepo:cached
+      # Git設定を共有
+      - ~/.gitconfig:/root/.gitconfig:ro
+
+    # 開発時に使うポートを予約（実際のアプリ開発時用）
+    ports:
+      - "3000:3000"  # Backend API
+      - "5173:5173"  # Vite Frontend
+
+    environment:
+      NODE_ENV: development
+
+    # 停止してもコンテナは残す
+    restart: unless-stopped

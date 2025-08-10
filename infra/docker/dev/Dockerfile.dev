@@ -1,0 +1,22 @@
+# Dockerfile.dev
+# 開発環境構築用の最小限コンテナ
+FROM node:22-slim
+
+# 基本的な開発ツールのみインストール
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# pnpmとNxをnpmでインストール（シンプルに）
+RUN npm install -g pnpm@latest nx@latest
+
+# 作業ディレクトリ設定
+WORKDIR /monprepo
+
+# bashプロンプトをシンプルに
+RUN echo 'PS1="🐳 dev$ "' >> /root/.bashrc
+
+# bashを維持
+CMD ["/bin/bash"]
