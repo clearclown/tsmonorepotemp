@@ -1,0 +1,84 @@
+name: Feature Request
+description: 新機能・改善提案用
+title: "[Feature]: "
+labels: [ "enhancement" ]
+assignees: []
+
+body:
+# ── 背景 ───────────────────────────────────────────────
+- type: textarea
+  id: problem
+  attributes:
+    label: Problem / Motivation
+    description: 何が課題で、なぜ解決したいか
+    placeholder: ex. 複数アカウントを切替えるのに毎回ログアウトが必要
+  validations:
+    required: true
+
+# ── 提案 ───────────────────────────────────────────────
+- type: textarea
+  id: proposal
+  attributes:
+    label: Proposed Solution
+    description: 具体的な機能案・UI モック・API 変更など
+    placeholder: ex. プロフィールからワンクリックでアカウント切替
+  validations:
+    required: true
+
+- type: textarea
+  id: acceptance
+  attributes:
+    label: Acceptance Criteria
+    description: 完了の定義 (Gherkin 形式推奨)。ユーザが得る価値を明確に
+    placeholder: |
+      **Given** 複数アカウントを持つユーザ
+      **When** ホバーでアカウントメニューを開く
+      **Then** 切替え先を選択して 1 秒以内に遷移する
+  validations:
+    required: true
+
+# ── 影響範囲 ──────────────────────────────────────────
+- type: checkboxes
+  id: impact
+  attributes:
+    label: Impact
+    description: 当該機能が影響する領域
+    options:
+    - Frontend
+    - Backend
+    - Database / Schema
+    - DevOps / Infra
+    - Docs only
+
+- type: textarea
+  id: deps
+  attributes:
+    label: Dependencies / Related Issues
+    placeholder: ex. 他ライブラリのアップグレードが必要 (#123)
+  validations:
+    required: false
+
+# ── タスク ───────────────────────────────────────────
+- type: textarea
+  id: tasks
+  attributes:
+    label: Tasks
+    description: 実装を完了するまでの具体タスク
+    placeholder: |
+      - [ ] 画面モック作成
+      - [ ] API 設計
+      - [ ] Unit テスト追加
+      - [ ] ドキュメント更新
+    value: |
+      - [ ]
+  validations:
+    required: false
+
+# ── 同意 ────────────────────────────────────────────
+- type: checkboxes
+  id: terms
+  attributes:
+    label: Code of Conduct
+    options:
+    - label: 同意します
+      required: true

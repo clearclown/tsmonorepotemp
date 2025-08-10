@@ -1,0 +1,88 @@
+name: Code Review Request
+description: 拡張性・可読性・継続性・脆弱性の4観点に基づくレビュー用
+title: "[Review]: "
+labels: [ "code review" ]
+assignees: []
+
+body:
+# ── 対象情報 ───────────────────────────────────────────
+- type: input
+  id: pr_link
+  attributes:
+    label: Pull Request URL
+    placeholder: ex. https://github.com/org/repo/pull/123
+  validations:
+    required: true
+
+- type: textarea
+  id: overview
+  attributes:
+    label: Overview / Scope
+    description: レビュー対象の概要・範囲・変更点を箇条書きで
+    placeholder: |
+      - 認証モジュールのリファクタ
+      - TokenService を DI 化
+  validations:
+    required: true
+
+# ── 事前セルフチェック ────────────────────────────────
+- type: checkboxes
+  id: self_check
+  attributes:
+    label: Self-Check (必須)
+    description: 提出前セルフレビュー
+    options:
+    - My code builds/executes without warnings
+    - Unit tests pass (>80% coverage)
+    - Public API 変更はドキュメント更新済み
+    - Secrets / Credentials を含まない
+
+# ── 観点提示 ───────────────────────────────────────────
+- type: markdown
+  attributes:
+    value: |
+      ### 🔍 Review Guide
+      **拡張性 / 可読性 / 継続性 / 脆弱性潰し** の 4 観点で、具体的・建設的な指摘を行ってください。
+      参考規約: `CODING_RULES.md`
+
+# ── 指摘欄 ────────────────────────────────────────────
+- type: textarea
+  id: review_comments
+  attributes:
+    label: Review Comments
+    description: 観点ごとにセクション分けして記入
+    placeholder: |
+      #### 拡張性
+      - インターフェース分離で将来機能の差替え容易
+      #### 可読性
+      - 変数 `x` は意味が不明瞭、`tokenExpiry` 推奨
+      #### 継続性
+      - CI に E2E テストが無い
+      #### 脆弱性潰し
+      - XSS 対策ヘッダ `Content-Security-Policy` 未設定
+    render: markdown
+  validations:
+    required: true
+
+# ── フォローアップタスク ───────────────────────────────
+- type: textarea
+  id: tasks
+  attributes:
+    label: Action Items
+    description: 指摘を反映するタスクをチェックリスト化
+    placeholder: |
+      - [ ] 変数名修正
+      - [ ] CSP ヘッダ追加
+    value: |
+      - [ ]
+  validations:
+    required: false
+
+# ── 同意 ────────────────────────────────────────────
+- type: checkboxes
+  id: terms
+  attributes:
+    label: Code of Conduct
+    options:
+    - label: 同意します
+      required: true
