@@ -1,0 +1,327 @@
+# ===========================================
+# Nx Monorepo Dockerignore Configuration
+# ===========================================
+# This file excludes unnecessary files from Docker build context
+# to optimize build performance and reduce image size
+
+# ===========================================
+# Version Control
+# ===========================================
+.git
+.gitignore
+.gitattributes
+.github
+!.github/workflows/docker-*.yml
+
+# ===========================================
+# IDE and Editor Files
+# ===========================================
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.editorconfig
+.prettierrc*
+.eslintrc*
+
+# ===========================================
+# Nx and Build Artifacts
+# ===========================================
+# Nx cache and temporary files
+.nx
+nx-cloud.env
+.nx-cache
+
+# Distribution directories
+dist
+tmp
+out
+build
+.next
+.nuxt
+
+# Nx workspace files (keep only essential)
+# nx.json and workspace.json/project.json are needed for builds
+!nx.json
+!workspace.json
+!project.json
+
+# ===========================================
+# Node.js / pnpm
+# ===========================================
+node_modules
+**/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# pnpm specific
+.pnpm-store
+pnpm-lock.yaml
+!pnpm-workspace.yaml
+
+# Package manager files (keep package.json for Docker builds)
+!package.json
+!**/package.json
+package-lock.json
+yarn.lock
+
+# ===========================================
+# Frontend (Vite/React)
+# ===========================================
+# Vite cache and build
+.vite
+*.local
+vite.config.ts.timestamp-*
+
+# React/TypeScript build artifacts
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# PWA generated files
+**/workbox-*.js
+**/sw.js
+**/service-worker.js
+**/manifest.json.backup
+
+# Tanstack Query devtools
+.tanstack
+
+# ===========================================
+# Mobile (Flutter)
+# ===========================================
+# Flutter/Dart
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/build/
+**/*.iml
+**/*.ipr
+**/*.iws
+.idea/
+
+# Flutter specific
+**/android/
+**/ios/
+**/windows/
+**/linux/
+**/macos/
+**/web/
+!**/web/index.html
+!**/web/favicon.png
+
+# ===========================================
+# Backend (NestJS)
+# ===========================================
+# NestJS build artifacts
+dist-nest
+.nest
+
+# TypeORM
+ormconfig.local.js
+ormconfig.local.json
+
+# ===========================================
+# Testing
+# ===========================================
+# Vitest
+coverage
+*.lcov
+.nyc_output
+vitest.config.ts.timestamp-*
+
+# Playwright
+playwright-report
+playwright/.cache
+test-results
+e2e/screenshots
+e2e/videos
+e2e/traces
+
+# ===========================================
+# Infrastructure
+# ===========================================
+# Terraform
+**/.terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+!example.tfvars
+terraform.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+crash.log
+crash.*.log
+
+# Kubernetes
+*.kubeconfig
+kubeconfig
+!k8s/base
+!k8s/overlays
+
+# ===========================================
+# Docker
+# ===========================================
+# Docker files (these are sent but not COPYed)
+Dockerfile*
+docker-compose*.yml
+docker-compose*.yaml
+!docker-compose.prod.yml
+.dockerignore
+
+# Docker volumes
+volumes
+data
+
+# ===========================================
+# CI/CD
+# ===========================================
+.github/workflows/local
+*.backup
+.env.backup
+
+# ===========================================
+# Environment and Secrets
+# ===========================================
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets
+credentials
+config.local.*
+
+# ===========================================
+# Logs and Temporary Files
+# ===========================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Temporary files
+tmp
+temp
+.tmp
+.temp
+*/temp*
+*/*/temp*
+temp?
+
+# ===========================================
+# Documentation and Miscellaneous
+# ===========================================
+docs
+*.md
+!README.md
+!README*.md
+LICENSE
+CHANGELOG*
+AUTHORS
+CONTRIBUTORS
+.mailmap
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# ===========================================
+# OS Specific
+# ===========================================
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# ===========================================
+# Exceptions (Files to Include)
+# ===========================================
+# Keep essential configuration files
+!tsconfig*.json
+!nest-cli.json
+!.npmrc
+!.nvmrc
+!turbo.json
+
+# Keep essential scripts
+!scripts/docker-*.sh
+!scripts/build.sh
+
+# Keep schema files
+!*.graphql
+!*.proto
+!openapi.yaml
+!swagger.json
+
+# Keep migration files
+!migrations/**
+
+# Keep public assets for frontend
+!apps/*/public/**
+!libs/*/assets/**
